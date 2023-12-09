@@ -3,6 +3,59 @@
 <head>
   <meta charset="utf-8">
   <title>Meta Quest 3 WebVR サンプル</title>
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+    }
+  </style>
+  <script>
+    // 3Dオブジェクトを定義する
+    var scene = new THREE.Scene();
+    var camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
+    var renderer = new THREE.WebGLRenderer({
+        canvas: document.getElementById("canvas"),
+    });
+
+    // 球体を定義する
+    var sphere = new THREE.Mesh(
+        new THREE.SphereGeometry(1, 16, 16),
+        new THREE.MeshBasicMaterial({color: "red"})
+    );
+    scene.add(sphere);
+
+    // 立方体を定義する
+    var cube = new THREE.Mesh(
+      new THREE.BoxGeometry(1, 1, 1),
+      new THREE.MeshBasicMaterial({color: "blue"})
+    );
+    scene.add(cube);
+    
+    // コントローラでオブジェクトを動かす
+    function onPointerDown(event) {
+      var object = event.target;
+      var controller = event.controller;
+    
+      // オブジェクトの移動先を取得する
+      var offset = controller.getDirection();
+      var newPosition = object.position + offset;
+    
+      // オブジェクトの位置を更新する
+      object.position = newPosition;
+    }
+    
+    // イベントリスナーを登録する
+    renderer.addEventListener("pointerdown", onPointerDown);
+    
+    // レンダリング
+    function render() {
+      renderer.render(scene, camera);
+      requestAnimationFrame(render);
+    }
+    
+    // レンダリングを開始する
+    render();
+  </script>
 </head>
 <body>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/138.0.0/three.min.js"></script>
