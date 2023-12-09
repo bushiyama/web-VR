@@ -5,15 +5,13 @@
   <title>Meta Quest 3 WebVR サンプル</title>
 </head>
 <body style="margin: 0; padding: 0;">
-  <canvas id="canvas" height="600" width="600"></canvas>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/0.159.0/three.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/159.0.0/three.min.js"></script>
   <script>
     // 3Dオブジェクトを定義する
     var scene = new THREE.Scene();
     var camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
-    var canvas = document.getElementById("canvas");
     var renderer = new THREE.WebGLRenderer({
-      canvas: canvas,
+      canvas: document.getElementById("canvas"),
     });
 
     // 球体を定義する
@@ -44,7 +42,7 @@
     }
 
     // イベントリスナーを登録する
-    renderer.xr.addEventListener("select", onPointerDown);
+    renderer.addEventListener("pointerdown", onPointerDown);
 
     // レンダリング
     function render() {
@@ -55,5 +53,6 @@
     // レンダリングを開始する
     render();
   </script>
+  <canvas id="canvas"></canvas>
 </body>
 </html>
