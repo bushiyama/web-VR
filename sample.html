@@ -11,8 +11,6 @@
     var scene = new THREE.Scene();
     var camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
     var canvas = document.getElementById("canvas");
-    // canvas.width = window.innerWidth;
-    // canvas.height = window.innerHeight;
     var renderer = new THREE.WebGLRenderer({
       canvas: canvas,
     });
@@ -56,6 +54,6 @@
     // レンダリングを開始する
     render();
   </script>
-  <canvas id="canvas"></canvas>
+  <canvas id="canvas" height="128" width="128"></canvas>
 </body>
 </html>
